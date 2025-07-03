@@ -6,7 +6,7 @@ function Navbar() {
     <div className='flex space-x-10 pl-3 py-3 items-center'>
         
         <Link to={"/"}>
-            <img src={logo} className='w-[80px] h-[80px] bg-yellow-400 rounded-full'></img>
+            <img src={logo} className='w-[80px] h-[80px] bg-yellow-400 rounded-full '></img>
         </Link>
 
         <Link to={"/"} className='text-2xl font-bold text-yellow-400'>
