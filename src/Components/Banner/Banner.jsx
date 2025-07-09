@@ -12,7 +12,6 @@ function Banner() {
       try{
         const res  = await axios.get('https://api.themoviedb.org/3/trending/movie/day?api_key=62843fc74fe19e4e73bd0a920408a4b6');
         const data = await res.data;
-        console.log(data);
         const movies = data.results;
         const curMovieIndex = getRandomValue(0 , movies.length-1);
         const movie  =  movies[curMovieIndex];

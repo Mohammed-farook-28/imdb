@@ -5,8 +5,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import Card from '../Card/Card';
 import Pagination from '../Pagination/Pagination';
 
-function MoviesCard() {
-  
+function MoviesCard({addMovieToWatchList , removeMovieFromWatchList , watchList}) {
     const [moviesData , setMoviesData] =  useState(null);
     const [isLoading , setIsLoading] = useState(true);
      const [pageNumber , setPageNumber] =  useState(1);
@@ -54,7 +53,7 @@ function MoviesCard() {
                 <div className='flex flex-wrap gap-8 justify-center'>
                 {
                   moviesData.map((movieObj) =>{
-                    return <Card  key={movieObj.id} movieObj={movieObj}/>
+                    return <Card  key={movieObj.id} movieObj={movieObj} addMovieToWatchList={addMovieToWatchList} removeMovieFromWatchList={removeMovieFromWatchList} watchList={watchList}/>
                   })
                 }
                 </div>
