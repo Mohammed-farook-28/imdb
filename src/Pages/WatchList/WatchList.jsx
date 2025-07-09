@@ -53,6 +53,21 @@ function WatchList({watchList , removeMovieFromWatchList}) {
      setMoviesInDisplay(sortedMovies);
    }
 
+   function chooseGenre(e){
+    
+      const curGenre = e.target.innerText;
+      console.log(curGenre);
+      if(curGenre === 'All Genre'){
+        setMoviesInDisplay([...watchList]);
+      }else{
+        let choosedGenre  = [...watchList];
+        let filtered = choosedGenre.filter((movie) =>(
+           genreConfiguration[movie.genre_ids[0]]===curGenre
+        ));
+
+        setMoviesInDisplay(filtered);
+    }
+   }
    
    const genere = Array.from(genreSet);
 
@@ -63,7 +78,7 @@ function WatchList({watchList , removeMovieFromWatchList}) {
         <div className='flex justify-center gap-6 flex-wrap'>
       {
         genere.map(genre =>{
-          return <button className='transition-all hover:scale-110  duration-300 hover:shadow-[0_0_25px_#facc15] hover:border-yellow-400 cursor-pointer rounded-4xl' >{genreConfiguration[genre]}</button>
+          return <button onClick={chooseGenre} className='transition-all hover:scale-110  duration-300 hover:shadow-[0_0_25px_#facc15] hover:border-yellow-400 cursor-pointer rounded-4xl' >{genreConfiguration[genre]}</button>
         })
       }
       </div>

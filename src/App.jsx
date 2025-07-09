@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import { Routes , Route}  from 'react-router-dom';
 import WatchList from './pages/WatchList/WatchList';
@@ -6,7 +6,20 @@ import Home from './pages/Home/Home';
 import Navbar from './Components/Navbar/NavBar';
 
 function App() {
-  const  [watchList , setWatchList]  =  useState([]);
+
+  const watchListItems = localStorage.getItem("watchList");
+
+  const defaultwatchList = (watchListItems === null)?[]  : JSON.parse(watchListItems);
+
+  const  [watchList , setWatchList]  =  useState(defaultwatchList);
+
+  function updatedWatchList(){
+    const watchListItems =  JSON.stringify(watchList);
+    localStorage.setItem("watchList" , watchListItems);
+  }
+  useEffect(()=>{
+    updatedWatchList();
+  },[watchList]);
   function addMovieToWatchList(movie){
     setWatchList([...watchList , movie]);
   }
