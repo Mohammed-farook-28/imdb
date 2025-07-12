@@ -1,40 +1,26 @@
-import { useEffect, useState } from 'react'
 import './App.css'
 import { Routes , Route}  from 'react-router-dom';
 import WatchList from './pages/WatchList/WatchList';
 import Home from './pages/Home/Home';
-import Navbar from './Components/Navbar/NavBar';
+import Navbar from '../src/Components/Navbar/Navbar'
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 function App() {
+  const theme = useSelector((state) => state.theme.theme);
 
-  const watchListItems = localStorage.getItem("watchList");
+  useEffect(() => {
+    document.body.className = theme === 'dark' ? 'dark-theme' : 'light-theme';
+  }, [theme]);
 
-  const defaultwatchList = (watchListItems === null)?[]  : JSON.parse(watchListItems);
-
-  const  [watchList , setWatchList]  =  useState(defaultwatchList);
-
-  function updatedWatchList(){
-    const watchListItems =  JSON.stringify(watchList);
-    localStorage.setItem("watchList" , watchListItems);
-  }
-  useEffect(()=>{
-    updatedWatchList();
-  },[watchList]);
-  function addMovieToWatchList(movie){
-    setWatchList([...watchList , movie]);
-  }
-  function removeMovieFromWatchList(movieObj){
-    const updatedWatchList = watchList.filter((movie) => movie.id != movieObj.id);
-    setWatchList(updatedWatchList);
-  }
-  return (  
-    <>
+  return (
+    <div className="app-container">
       <Navbar/>
-       <Routes>
-        <Route path='/' element={<Home watchList={watchList} addMovieToWatchList={addMovieToWatchList} removeMovieFromWatchList={removeMovieFromWatchList} />}></Route>
-        <Route path='/watchlist' element={<WatchList watchList={watchList}   removeMovieFromWatchList={removeMovieFromWatchList}/>}></Route>
-       </Routes>
-    </>
+      <Routes>
+        <Route path='/' element={<Home />}></Route>
+        <Route path='/watchlist' element={<WatchList />}></Route>
+      </Routes>
+    </div>
   )
 }
 

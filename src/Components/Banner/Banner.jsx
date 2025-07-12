@@ -26,7 +26,7 @@ function Banner() {
     }
     useEffect(()=>{
       fetchMovieData();
-    }, 300);
+    }, []);
 
   return (
        <div className='bannerClass h-[60vh] transition-all duration-300 hover:shadow-[0_0_25px_#facc15] hover:border-yellow-400 cursor-pointer rounded-4xl'>
