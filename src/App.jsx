@@ -5,6 +5,7 @@ import Home from './pages/Home/Home';
 import Navbar from '../src/Components/Navbar/Navbar'
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import Users from './Components/User/Users';
 
 function App() {
   const theme = useSelector((state) => state.theme.theme);
@@ -19,6 +20,8 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />}></Route>
         <Route path='/watchlist' element={<WatchList />}></Route>
+        
+        <Route path='/Users' element={<Users />}></Route>
       </Routes>
     </div>
   )
